@@ -44,8 +44,8 @@
 	}
 	// レイアウト選択肢
 	const layouts = [
-		{ value: 'twitter', label: 'Twitter風' },
-		{ value: 'simple', label: 'インスタ風' }
+		{ value: 'twitter', label: 'Twitter風' }
+		// { value: 'simple', label: 'インスタ風' }
 	];
 	let selectedLayout = 'twitter';
 	import { onMount, afterUpdate } from 'svelte';
