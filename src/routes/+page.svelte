@@ -13,7 +13,6 @@
 	import bookmark from '$lib/assets/bookmark.png';
 	import uploadarrow from '$lib/assets/uploadarrow.png';
 
-	const iconPaths = [coment, repost, heartColored ? heart2 : heart, hyouzi, bookmark, uploadarrow];
 	// アイコン画像URL
 	let iconUrl = 'https://pbs.twimg.com/profile_images/1883413777074487296/MHN6aWvh_400x400.jpg';
 	let iconHistory = [iconUrl];
@@ -234,6 +233,14 @@
 			const iconSize = 28;
 			// 各アイコンごとに個別のGAP（間隔）を設定
 			const iconGaps = [0, 80, 80, 80, 100, 40]; // 例: 1つ目は0px, 2つ目は70px, 3つ目は90px, 4つ目は60px
+			const iconPaths = [
+				coment,
+				repost,
+				heartColored ? heart2 : heart,
+				hyouzi,
+				bookmark,
+				uploadarrow
+			];
 
 			// アイコン列の全体幅を計算
 			const iconsTotalWidth = iconGaps.reduce((a, b) => a + b, 0);
