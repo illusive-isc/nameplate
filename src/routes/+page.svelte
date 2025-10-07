@@ -12,7 +12,10 @@
 	import hyouzi from '$lib/assets/hyouzi.png';
 	import bookmark from '$lib/assets/bookmark.png';
 	import uploadarrow from '$lib/assets/uploadarrow.png';
-
+	let comentCount = '1';
+	let retweetCount = '2';
+	let heartCount = '3';
+	let viewCount = '4';
 	// アイコン画像URL
 	let iconUrl = 'https://pbs.twimg.com/profile_images/1883413777074487296/MHN6aWvh_400x400.jpg';
 	let iconHistory = [iconUrl];
@@ -241,7 +244,7 @@
 				bookmark,
 				uploadarrow
 			];
-
+			const iconCounts = [comentCount, retweetCount, heartCount, viewCount, '', ''];
 			// アイコン列の全体幅を計算
 			const iconsTotalWidth = iconGaps.reduce((a, b) => a + b, 0);
 			// キャンバス中央に配置
@@ -274,6 +277,13 @@
 					// 各アイコンのX座標はstartX + 各GAPの合計
 					const iconX = startX + iconGaps.slice(0, i + 1).reduce((a, b) => a + b, 0) - iconSize / 2;
 					ctx.drawImage(off, iconX, buttonY - iconSize / 2, iconSize, iconSize);
+					if (iconCounts[i] && iconCounts[i].trim() !== '') {
+						ctx.font = '14px sans-serif';
+						ctx.fillStyle = '#888';
+						const numberX = iconX + iconSize + 8; // アイコンの右側
+						const numberY = buttonY + 4; // アイコンと同じ高さ
+						ctx.fillText(iconCounts[i], numberX, numberY);
+					}
 				};
 			});
 		} else if (selectedLayout === 'simple') {
@@ -510,6 +520,44 @@
 				いいね
 			</label>
 		</div>
+		<div style="display: flex; flex-direction: column; gap: 0.5em; font-weight: bold;">
+			<span>アイコン数字</span>
+			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5em; font-weight: normal;">
+				<label style="display: flex; flex-direction: column; gap: 0.2em; font-size: 0.9em;">
+					コメント
+					<input
+						bind:value={comentCount}
+						placeholder="12"
+						style="padding: 3px 6px; border-radius: 4px; border: 1px solid #ccc; font-size: 0.9em;"
+					/>
+				</label>
+				<label style="display: flex; flex-direction: column; gap: 0.2em; font-size: 0.9em;">
+					リツイート
+					<input
+						bind:value={retweetCount}
+						placeholder="34"
+						style="padding: 3px 6px; border-radius: 4px; border: 1px solid #ccc; font-size: 0.9em;"
+					/>
+				</label>
+				<label style="display: flex; flex-direction: column; gap: 0.2em; font-size: 0.9em;">
+					いいね
+					<input
+						bind:value={heartCount}
+						placeholder="56"
+						style="padding: 3px 6px; border-radius: 4px; border: 1px solid #ccc; font-size: 0.9em;"
+					/>
+				</label>
+				<label style="display: flex; flex-direction: column; gap: 0.2em; font-size: 0.9em;">
+					表示回数
+					<input
+						bind:value={viewCount}
+						placeholder="1.2万"
+						style="padding: 3px 6px; border-radius: 4px; border: 1px solid #ccc; font-size: 0.9em;"
+					/>
+				</label>
+			</div>
+		</div>
+
 		<div style="margin-top: 0.7em;">
 			<button
 				on:click={copyCanvasToClipboard}
