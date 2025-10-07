@@ -5,12 +5,14 @@
 	// 色付けON/OFF用チェックボックス
 	let retweetColored = true;
 	let heartColored = true;
+	let bookmarkColored = true;
 	import coment from '$lib/assets/coment.png';
 	import repost from '$lib/assets/repost.png';
 	import heart2 from '$lib/assets/heart_2.png';
 	import heart from '$lib/assets/heart.png';
 	import hyouzi from '$lib/assets/hyouzi.png';
 	import bookmark from '$lib/assets/bookmark.png';
+	import bookmark2 from '$lib/assets/bookmark_2.png';
 	import uploadarrow from '$lib/assets/uploadarrow.png';
 	let comentCount = '1';
 	let retweetCount = '2';
@@ -241,7 +243,7 @@
 				repost,
 				heartColored ? heart2 : heart,
 				hyouzi,
-				bookmark,
+				bookmarkColored ? bookmark2 : bookmark,
 				uploadarrow
 			];
 			const iconCounts = [comentCount, retweetCount, heartCount, viewCount, '', ''];
@@ -268,6 +270,10 @@
 					} else if (i === 2) {
 						// ハート: 色付けONならピンク、OFFなら黒
 						offCtx.fillStyle = heartColored ? '#e1306c' : '#222';
+						offCtx.fillRect(0, 0, iconSize, iconSize);
+					} else if (i === 4) {
+						// ハート: 色付けONならピンク、OFFなら黒
+						offCtx.fillStyle = bookmarkColored ? 'rgb(29 155 240)' : '#222';
 						offCtx.fillRect(0, 0, iconSize, iconSize);
 					} else {
 						offCtx.fillStyle = '#222';
@@ -511,13 +517,23 @@
 			/>
 		</label>
 		<div style="display:flex; gap:1.5em; align-items:center; margin-bottom:0.5em;">
-			<label style="font-weight:bold; display:flex; align-items:center; gap:0.6em;">
+			<label
+				style="font-weight:bold; display:flex; align-items:center; gap:0.6em; font-size:0.9em;"
+			>
 				<input type="checkbox" bind:checked={retweetColored} />
 				リツイート
 			</label>
-			<label style="font-weight:bold; display:flex; align-items:center; gap:0.6em;">
+			<label
+				style="font-weight:bold; display:flex; align-items:center; gap:0.6em; font-size:0.9em;"
+			>
 				<input type="checkbox" bind:checked={heartColored} />
 				いいね
+			</label>
+			<label
+				style="font-weight:bold; display:flex; align-items:center; gap:0.6em; font-size:0.9em;"
+			>
+				<input type="checkbox" bind:checked={bookmarkColored} />
+				ブックマーク
 			</label>
 		</div>
 		<div style="display: flex; flex-direction: column; gap: 0.5em; font-weight: bold;">
